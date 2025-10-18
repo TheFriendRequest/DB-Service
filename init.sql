@@ -1,5 +1,22 @@
--- Drop existing tables if they exist
-DROP TABLE IF EXISTS EventParticipants, UserInterests, Messages, Events, Interests, Users;
+-- ==========================================================
+-- Friend Request Project: Initialization Script
+-- This script is self-contained — it will create and use
+-- a local database named `friend_request_db` automatically.
+-- ==========================================================
+
+-- Create database if not exists
+CREATE DATABASE IF NOT EXISTS friend_request_db;
+
+-- Use the database
+USE friend_request_db;
+
+-- Drop existing tables safely (in dependency order)
+DROP TABLE IF EXISTS EventParticipants;
+DROP TABLE IF EXISTS UserInterests;
+DROP TABLE IF EXISTS Messages;
+DROP TABLE IF EXISTS Events;
+DROP TABLE IF EXISTS Interests;
+DROP TABLE IF EXISTS Users;
 
 -- -------------------------
 -- USERS
@@ -103,3 +120,8 @@ INSERT INTO Messages (sender_id, receiver_id, content) VALUES
 (1, 2, 'Hey Bob, want to join the study group?'),
 (2, 1, 'Sure, what time?'),
 (3, 1, 'See you at basketball tonight!');
+
+-- ==========================================================
+-- ✅ Database successfully initialized.
+-- ==========================================================
+SELECT 'Database friend_request_db initialized successfully!' AS message;
