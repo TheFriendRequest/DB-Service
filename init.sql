@@ -1,7 +1,6 @@
 -- ==========================================================
 -- Friend Request Project: Initialization Script (SCHEMA + SEED)
 -- ==========================================================
-
 CREATE DATABASE IF NOT EXISTS friend_request_db;
 USE friend_request_db;
 
@@ -12,6 +11,7 @@ DROP TABLE IF EXISTS UserInterests;
 DROP TABLE IF EXISTS Events;
 DROP TABLE IF EXISTS Interests;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS EventInterests;
 
 -- -------------------------
 -- USERS
@@ -101,11 +101,11 @@ CREATE TABLE EventInterests (
 -- ================================================
 
 -- users
-INSERT INTO Users (first_name, last_name, username, email, profile_picture, password_hash)
+INSERT INTO Users (first_name, last_name, username, email, profile_picture)
 VALUES
-('Alice', 'Green', 'aliceg', 'alice@columbia.edu', NULL, 'hash1'),
-('Bob', 'Cohen', 'bobc', 'bob@columbia.edu', NULL, 'hash2'),
-('Charlie', 'Kim', 'charliek', 'charlie@columbia.edu', NULL, 'hash3');
+('Alice', 'Green', 'aliceg', 'alice@columbia.edu', NULL),
+('Bob', 'Cohen', 'bobc', 'bob@columbia.edu', NULL),
+('Charlie', 'Kim', 'charliek', 'charlie@columbia.edu', NULL);
 
 -- interests
 INSERT INTO Interests (interest_name) VALUES
