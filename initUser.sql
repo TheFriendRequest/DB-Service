@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS UserSchedule;
 -- -------------------------
 CREATE TABLE Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
+    firebase_uid VARCHAR(128) UNIQUE NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     username VARCHAR(100) UNIQUE NOT NULL,
@@ -74,11 +75,12 @@ CREATE TABLE Friendships (
 -- INSERT SEED DATA
 -- ================================================
 
--- Users
-INSERT INTO Users (first_name, last_name, username, email, profile_picture) VALUES
-('Alice', 'Green', 'aliceg', 'alice@columbia.edu', NULL),
-('Bob', 'Cohen', 'bobc', 'bob@columbia.edu', NULL),
-('Charlie', 'Kim', 'charliek', 'charlie@columbia.edu', NULL);
+-- Users (Note: firebase_uid is required - seed data uses placeholder values)
+-- In production, these would be real Firebase UIDs from authentication
+INSERT INTO Users (firebase_uid, first_name, last_name, username, email, profile_picture) VALUES
+('firebase_uid_alice', 'Alice', 'Green', 'aliceg', 'alice@columbia.edu', NULL),
+('firebase_uid_bob', 'Bob', 'Cohen', 'bobc', 'bob@columbia.edu', NULL),
+('firebase_uid_charlie', 'Charlie', 'Kim', 'charliek', 'charlie@columbia.edu', NULL);
 
 -- Interests
 INSERT INTO Interests (interest_name) VALUES
