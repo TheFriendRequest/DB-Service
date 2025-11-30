@@ -7,6 +7,7 @@ USE event_db;
 -- Drop tables in correct dependency order
 DROP TABLE IF EXISTS EventInterests;
 DROP TABLE IF EXISTS Events;
+DROP TABLE IF EXISTS Tasks;
 DROP TABLE IF EXISTS Interests;
 
 -- -------------------------
@@ -43,6 +44,25 @@ CREATE TABLE EventInterests (
     FOREIGN KEY (event_id) REFERENCES Events(event_id) ON DELETE CASCADE,
     FOREIGN KEY (interest_id) REFERENCES Interests(interest_id) ON DELETE CASCADE
 );
+
+-- -------------------------
+-- TASKS (for async event processing)
+-- -------------------------
+CREATE TABLE Tasks (
+    task_id VARCHAR(36) PRIMARY KEY,
+    task_type VARCHAR(50) NOT NULL DEFAULT 'create_event',
+    status ENUM('pending', 'processing', 'completed', 'failed') NOT NULL DEFAULT 'pending',
+    request_data JSON,  -- Store the original request data
+    result_data JSON,  -- Store the result when completed
+    error_message TEXT,  -- Store error if failed
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    started_at TIMESTAMP NULL,
+    completed_at TIMESTAMP NULL,
+    created_by INT,  -- User ID who initiated the task
+    INDEX idx_status (status),
+    INDEX idx_created_by (created_by),
+    INDEX idx_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ================================================
 -- INSERT SEED DATA

@@ -21,6 +21,7 @@ CREATE TABLE Users (
     last_name VARCHAR(100) NOT NULL,
     username VARCHAR(100) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
+    role VARCHAR(50) DEFAULT 'user' NOT NULL,
     profile_picture VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
