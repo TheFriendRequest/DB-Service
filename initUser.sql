@@ -65,10 +65,12 @@ CREATE TABLE Friendships (
     friendship_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id_1 INT NOT NULL,
     user_id_2 INT NOT NULL,
+    requested_by INT NOT NULL,
     status ENUM('pending','accepted') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id_1) REFERENCES Users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id_2) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (requested_by) REFERENCES Users(user_id) ON DELETE CASCADE,
     UNIQUE KEY (user_id_1, user_id_2)
 );
 
@@ -103,6 +105,6 @@ INSERT INTO UserInterests (user_id, interest_id) VALUES
 (3,3); -- Charlie -> Cooking
 
 -- Friendships
-INSERT INTO Friendships (user_id_1, user_id_2, status) VALUES
-(1,2,'accepted'),
-(1,3,'pending');
+INSERT INTO Friendships (user_id_1, user_id_2, requested_by, status) VALUES
+(1,2,1,'accepted'),
+(1,3,1,'pending');
